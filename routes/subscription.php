@@ -12,8 +12,5 @@ Route::get('/user/invoice/{invoice}', [SubscriptionController::class, "downloadI
     ->middleware(['auth', 'verified'])
     ->name('download-invoice');
 
-Route::get('/invoices', [SubscriptionController::class, "listInvoicesForSubscription"])
-    ->middleware(['auth', 'verified'])
-    ->name("list-invoices");
 
 require __DIR__ . '/auth.php';

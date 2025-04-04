@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plan;
+use Inertia\Inertia;
 
-class PlanController extends Controller
+class BillingController extends Controller
 {
-    public function index()
+    private function getAllPlans()
     {
         $plans = Plan::all()->groupBy('chargebee_product')->map(function ($group) {
             $monthly = $group->where('frequency', 'month')->first();
@@ -29,6 +30,35 @@ class PlanController extends Controller
 
         })->values();
 
-        return response()->json($plans);
+        return $plans;
+    }
+
+    public function pricing()
+    {
+        return Inertia::render('pricing/pricing', [
+            "plans" => $this->getAllPlans()
+        ]);
+    }
+
+    public function billing(Request $request) {
+        if ($request->user()?->subscribed('default')) {
+            return redirect()->route('subscription-settings');
+        }
+        return Inertia::render('pricing/billingPage', [
+            "plans" => $this->getAllPlans()
+        ]);
+    }
+
+    function invoices(Request $request) {
+        return Inertia::render('settings/invoices', [
+            "invoices" => $request->user()->invoices()
+        ]);
+    }
+
+    function subscriptions(Request $request) {
+        return Inertia::render('settings/subscriptions', [
+            "subscriptions" => $request?->user()?->subsriptionWithProductDetails() ?? null,
+            "plans" => $this->getAllPlans()
+        ]);
     }
 }

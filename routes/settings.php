@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::get('settings/appearance', function () {
         return Inertia::render('settings/appearance');
     })->name('appearance');
-    Route::get('settings/subscriptions', function() {
-        return Inertia::render('settings/subscriptions');
-    })->name('subscription-settings');
-    Route::get('settings/invoices', function () {
-        return Inertia::render('settings/invoices');
-    })->name('invoice-page');
+    Route::get('settings/subscriptions',[BillingController::class, 'subscriptions'])->name('subscription-settings');
+    Route::get('settings/invoices', [BillingController::class, 'invoices'])->name('invoice-page');
 });
