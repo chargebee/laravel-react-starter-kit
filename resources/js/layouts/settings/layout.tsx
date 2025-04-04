@@ -30,7 +30,7 @@ const sidebarNavItems: any = [
         section: 'Billing',
         items: [
             {
-                title: 'Subscriptions',
+                title: 'Subscription',
                 url: '/settings/subscription',
                 icon: null,
             },

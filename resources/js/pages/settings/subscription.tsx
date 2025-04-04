@@ -45,10 +45,9 @@ const CancelSubscriptionButton = () => {
     );
 };
 
-const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
-    console.log(subscriptions);
+const SubscriptionSettings: React.FC = ({subscription: subscription, plans}) => {
     const {auth} = usePage<SharedData>().props;
-    const isSubscribed = subscriptions != null;
+    const isSubscribed = subscription != null;
     const [hoveredPlan, setHoveredPlan] = useState<string | null>(null);
     const [cancelModalOpen, setCancelModalOpen] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);
@@ -73,11 +72,11 @@ const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
     };
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Subscriptions"/>
+            <Head title="Subscription"/>
             <SettingsLayout>
                 <div className="p-6">
                     <div className="text-center max-w-3xl mx-auto mb-12">
-                        <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-3">Subscriptions</h1>
+                        <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-3">Subscription</h1>
                         <p className="text-lg text-zinc-600 dark:text-zinc-300">
                             Manage your subscription and payment details
                         </p>
@@ -120,24 +119,24 @@ const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
                                                 ? "text-[#FF3300] dark:text-[#FF3300]"
                                                 : "text-zinc-900 dark:text-zinc-50"
                                         } transition-colors duration-300`}>
-                                            {subscriptions.items[0].plan_name}
+                                            {subscription.items[0].plan_name}
                                         </h2>
                                         <p className={`text-sm font-medium ${
-                                            subscriptions.chargebee_status?.toLowerCase() === 'in_trial'
+                                            subscription.chargebee_status?.toLowerCase() === 'in_trial'
                                                 ? "text-amber-500 dark:text-amber-400"
-                                                : subscriptions.chargebee_status?.toLowerCase() === 'active'
+                                                : subscription.chargebee_status?.toLowerCase() === 'active'
                                                     ? "text-green-600 dark:text-green-400"
                                                     : "text-red-600 dark:text-red-400"
                                         }`}>
-                                            {subscriptions.chargebee_status?.toUpperCase() || "ACTIVE"}
+                                            {subscription.chargebee_status?.toUpperCase() || "ACTIVE"}
                                         </p>
                                     </div>
                                     <div className="text-right">
                                         <p className="text-sm text-zinc-600 dark:text-zinc-300">
-                                            Started: {formatDate(subscriptions.created_at)}
+                                            Started: {formatDate(subscription.created_at)}
                                         </p>
                                         <p className="text-sm text-zinc-600 dark:text-zinc-300">
-                                            Renews: {formatDate(subscriptions.next_billing_at)}
+                                            Renews: {formatDate(subscription.next_billing_at)}
                                         </p>
                                     </div>
                                 </div>
@@ -153,13 +152,13 @@ const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
                                         <div className="bg-gray-50 dark:bg-zinc-700 p-4 rounded-lg">
                                             <p className="text-sm text-gray-500 dark:text-gray-400">Billing Cycle</p>
                                             <p className="text-sm text-zinc-900 dark:text-zinc-50">
-                                                {subscriptions.chargebee_price?.match(/Monthly/i) ? 'Monthly' : 'Yearly'}
+                                                {subscription.chargebee_price?.match(/Monthly/i) ? 'Monthly' : 'Yearly'}
                                             </p>
                                         </div>
                                         <div className="bg-gray-50 dark:bg-zinc-700 p-4 rounded-lg">
                                             <p className="text-sm text-gray-500 dark:text-gray-400">Currency</p>
                                             <p className="text-sm text-zinc-900 dark:text-zinc-50">
-                                                {subscriptions.currency}
+                                                {subscription.currency}
                                             </p>
                                         </div>
                                     </div>
@@ -177,7 +176,7 @@ const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {subscriptions.items?.map((item, index) => (
+                                                {subscription.items?.map((item, index) => (
                                                     <tr key={index} className="border-t">
                                                         <td className="border border-gray-200 dark:border-gray-700 p-2 text-zinc-600 dark:text-zinc-300">
                                                             {item.plan_name}
@@ -271,7 +270,7 @@ const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
                                             </span>
                                         )}
                                     </button>
-                                    {subscriptions?.chargebee_status !== 'cancelled' ? <button
+                                    {subscription?.chargebee_status !== 'cancelled' ? <button
                                         onClick={() => setCancelModalOpen(true)}
                                         className="flex-1 px-4 py-3 text-center font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-zinc-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all"
                                     >
