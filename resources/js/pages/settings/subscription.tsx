@@ -12,7 +12,7 @@ import ChargebeeBanner from "@/pages/banners/chargebeeBanner";
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Billing Details',
-        href: '/settings/subscriptions',
+        href: '/settings/subscription',
     }
 ];
 
@@ -48,7 +48,7 @@ const CancelSubscriptionButton = () => {
 const SubscriptionSettings: React.FC = ({subscriptions, plans}) => {
     console.log(subscriptions);
     const {auth} = usePage<SharedData>().props;
-    const isSubscribed = subscriptions != null && subscriptions;
+    const isSubscribed = subscriptions != null;
     const [hoveredPlan, setHoveredPlan] = useState<string | null>(null);
     const [cancelModalOpen, setCancelModalOpen] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);

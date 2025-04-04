@@ -110,7 +110,7 @@ class CustomWebhookHandler extends HandleWebhookReceived
                 'item_price_id' => $itemPrice->id,
             ]);
         } catch (Exception $ex) {
-            Log::info('Exception while handling item_price_updated webhook from ChargeBee', [
+            Log::info('Exception while handling item_price_updated webhook from Chargebee', [
                 'message' => $ex->getMessage()
             ]);
         }

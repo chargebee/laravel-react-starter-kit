@@ -17,6 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::get('settings/appearance', function () {
         return Inertia::render('settings/appearance');
     })->name('appearance');
-    Route::get('settings/subscriptions',[BillingController::class, 'subscriptions'])->name('subscription-settings');
+    Route::get('settings/subscription',[BillingController::class, 'subscriptions'])->name('subscription-settings');
     Route::get('settings/invoices', [BillingController::class, 'invoices'])->name('invoice-page');
 });

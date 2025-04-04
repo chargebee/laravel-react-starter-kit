@@ -31,7 +31,7 @@ const sidebarNavItems: any = [
         items: [
             {
                 title: 'Subscriptions',
-                url: '/settings/subscriptions',
+                url: '/settings/subscription',
                 icon: null,
             },
             {

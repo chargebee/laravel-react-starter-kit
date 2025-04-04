@@ -9,7 +9,7 @@ use App\Models\Plan;
 class FetchPlans extends Command
 {
     protected $signature = 'chargebee:fetch-plans';
-    protected $description = 'Fetch plans from ChargeBee and store them in the database';
+    protected $description = 'Fetch plans from Chargebee and store them in the database';
 
     /**
      * @throws \Exception
@@ -20,7 +20,7 @@ class FetchPlans extends Command
         $apiKey = env('CHARGEBEE_API_KEY');
 
         if (!$site || !$apiKey) {
-            $this->error('ChargeBee site or API key is missing in .env file');
+            $this->error('Chargebee site or API key is missing in .env file');
             return;
         }
 
