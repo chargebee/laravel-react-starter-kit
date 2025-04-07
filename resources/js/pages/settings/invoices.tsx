@@ -32,29 +32,14 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ];
 
-const Invoices: React.FC = () => {
-    const [invoices, setInvoices] = useState<Invoice[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+type InvoicesProps = {
+    invoices: Invoice[];
+};
+const Invoices: React.FC<InvoicesProps> = ({invoices}) => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [downloadingInvoiceId, setDownloadingInvoiceId] = useState<string | null>(null);
     const [hoveredInvoiceId, setHoveredInvoiceId] = useState<string | null>(null);
 
-    useEffect(() => {
-        // Fetch invoices with loading state
-        const fetchInvoices = async () => {
-            setIsLoading(true);
-            try {
-                const response = await fetch("/invoices");
-                const data = await response.json();
-                setInvoices(data);
-            } catch (error) {
-                console.error("Error fetching invoices:", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchInvoices();
-    }, []);
 
     const formatCurrency = (amount: number, currency: string) => {
         return new Intl.NumberFormat("en-US", {
@@ -69,22 +54,10 @@ const Invoices: React.FC = () => {
 
     const handleDownloadInvoice = async (invoiceId: string) => {
         setDownloadingInvoiceId(invoiceId);
-        try {
-            const response = await fetch(`/user/invoice/${invoiceId}`);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = `invoice-${invoiceId}.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-        } catch (error) {
-            console.error("Error downloading invoice:", error);
-        } finally {
-            setDownloadingInvoiceId(null);
-        }
+        setIsLoading(true);
+        window.location.href = `/user/invoice/${invoiceId}`;
+        setDownloadingInvoiceId(null);
+        setIsLoading(false);
     };
 
     return (
@@ -202,39 +175,23 @@ const Invoices: React.FC = () => {
                                         </div>
 
                                         <div className="p-6 mt-auto bg-zinc-50 dark:bg-zinc-900">
-                                            <button
-                                                onClick={() => handleDownloadInvoice(invoice.id)}
-                                                disabled={downloadingInvoiceId === invoice.id}
-                                                className={`w-full px-4 py-3 text-center font-medium rounded-lg transition-all text-white ${
+                                            <a
+                                                href={`/user/invoice/${invoice.id}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`block w-full px-4 py-3 text-center font-medium rounded-lg transition-all text-white ${
                                                     hoveredInvoiceId === invoice.id
                                                         ? "bg-[#FF3300] hover:bg-opacity-90"
                                                         : "bg-[#012A38] hover:bg-opacity-90"
-                                                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                                                }`}
                                             >
-                                                {downloadingInvoiceId === invoice.id ? (
-                                                    <span className="flex items-center justify-center">
-                                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                                                             xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                             viewBox="0 0 24 24">
-                                                            <circle className="opacity-25" cx="12" cy="12" r="10"
-                                                                    stroke="currentColor" strokeWidth="4"></circle>
-                                                            <path className="opacity-75" fill="currentColor"
-                                                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                        </svg>
-                                                        Downloading...
-                                                    </span>
-                                                ) : (
-                                                    <span className="flex items-center justify-center">
-                                                        <svg className="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                             viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd"
-                                                                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                                                  clipRule="evenodd"/>
-                                                        </svg>
-                                                        Download Invoice
-                                                    </span>
-                                                )}
-                                            </button>
+                                                <span className="flex items-center justify-center">
+                                                    <svg className="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd"/>
+                                                    </svg>
+                                                Download Invoice
+                                                </span>
+                                            </a>
                                         </div>
 
                                         {hoveredInvoiceId === invoice.id && (

@@ -3,22 +3,14 @@ import getSymbolFromCurrency from "currency-symbol-map";
 import CommandWithCopyButton from "@/pages/Utils/copyClipboardCommand";
 
 
-export default function Pricing() {
+export default function Pricing({plans}) {
     const [billing, setBilling] = useState("Monthly");
     const [hoveredCard, setHoveredCard] = useState(null);
-    const [plans, setPlans] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingPlanId, setLoadingPlanId] = useState(null);
     const markerRef = useRef(null);
     const monthlyRef = useRef(null);
     const yearlyRef = useRef(null);
-
-    useEffect(() => {
-        fetch("/plans/list") // Adjust URL based on your backend
-            .then((response) => response.json())
-            .then((data) => {setPlans(data)})
-            .catch((error) => console.error("Error fetching plans:", error));
-    }, []);
 
     useEffect(() => {
         if (monthlyRef.current && markerRef.current) {

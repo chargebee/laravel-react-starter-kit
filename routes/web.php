@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\BillingController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -13,17 +14,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
-Route::get('billing', function () {
-    if (auth()->user()?->subscribed('default')) {
-        return redirect()->route('subscription-settings');
-    }
-    return Inertia::render('pricing/billingPage');
-})->name('billing');
-
-
-Route::get('pricing', function () {
-    return Inertia::render('pricing/pricing');
-})->name('pricing');
+Route::get('billing', [BillingController::class, "billing"])->name('billing');
+Route::get('pricing', [BillingController::class, "pricing"])->name('pricing');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('failed-payment', function () {
@@ -37,7 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 Route::middleware([])->group(function () {
     Route::get('something-went-wrong', function () {
-        return Inertia::render('errorPage', [
+        return Inertia::render('banners/errorPage', [
             'flash' => session()->only(['error', 'success'])
         ]);
     })->name('something-went-wrong');
@@ -48,5 +40,4 @@ require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/checkout.php';
 require __DIR__ . '/subscription.php';
-require __DIR__ . '/api.php';
 

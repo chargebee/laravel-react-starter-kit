@@ -25,9 +25,4 @@ class SubscriptionController extends Controller
     {
         return $request->user()?->downloadInvoice($invoiceId);
     }
-
-    public function listInvoicesForSubscription(Request $request)
-    {
-        return $request->user()?->invoices();
-    }
 }

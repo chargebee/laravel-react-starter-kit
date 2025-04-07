@@ -10,10 +10,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function BillingPage() {
+export default function BillingPage({plans}) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Pricing/>
+            <Pricing plans={plans}/>
             <ChargebeeBanner/>
         </AppLayout>
     )
