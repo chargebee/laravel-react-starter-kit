@@ -21,7 +21,7 @@ cd your-project-name
 ### Environment Configuration
 
 - Fill in the Chargebee-related `.env` variables (see `.env.example`).
-- ⚠️ **Important**: Run the server on port `8080` or `8443` for Chargebee checkout to work.
+- ⚠️ **Important**: Run the server on port `8080` or `8443` for Chargebee checkout to work. You can do this by adding`SERVER_PORT=8080` in .env file.
 
 ## Initial Setup
 
@@ -55,8 +55,8 @@ If Cloudflare Tunnel gives you a URL like `https://{your-tunnel-name}.trycloudfl
 
 ## Running Your Application
 
-Start the server:
+Start the application using:
 
 ```sh
-php artisan serve
+composer run dev 
 ```
