@@ -2,6 +2,13 @@
 
 Quickly set up billing in your Laravel application using Chargebee.
 
+## Introduction
+
+You can watch the below video for a quick video introduction of this starter kit and the [Laravel Cashier for Chargebee](https://github.com/chargebee/cashier-chargebee) package used in this starter kit.
+
+[![Video introduction of Laravel Cashier for Chargebee and Starter Kit](https://img.youtube.com/vi/jBl8XagjG1w/0.jpg)](https://www.youtube.com/watch?v=jBl8XagjG1w)
+
+
 ## Getting Started
 
 ### Installation
