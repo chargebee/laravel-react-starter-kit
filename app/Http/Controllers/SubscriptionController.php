@@ -12,7 +12,7 @@ class SubscriptionController extends Controller
             $subscription = $request->user()?->subscription('default');
 
             if ($subscription && $subscription->cancelNow()) {
-                return redirect('/pricing')->with('success', 'Subscription canceled successfully.');
+                return redirect('/dashboard')->with('success', 'Subscription canceled successfully.');
             }
 
             return redirect('/something-went-wrong')->with('error', 'Something went wrong while canceling the subscription.');
