@@ -169,12 +169,10 @@ export default function Pricing({plans}) {
                                         <a
                                             href={`/checkout/${planId}`}
                                             onClick={(e) => handleCheckoutClick(e, planId)}
-                                            className={`block w-full px-4 py-3 text-center font-medium rounded-lg transition-all ${
-                                                hoveredCard === index
-                                                    ? "bg-[#FF3300] text-white hover:bg-opacity-90"
-                                                    : plan.default && hoveredCard === null
-                                                        ? "bg-[#FF3300] text-white hover:bg-opacity-90"
-                                                        : "bg-[#012A38] text-white hover:bg-opacity-90"
+                                            className={`block w-full px-4 py-3 text-center font-medium rounded-lg transition-all text-white ${
+                                                plan.default
+                                                    ? "bg-[#FF3300] hover:bg-opacity-90"
+                                                    : "bg-[#012A38] hover:bg-[#FF3300]"
                                             } ${loading ? "cursor-not-allowed" : ""}`}
                                         >
                                             {isLoading ? (
