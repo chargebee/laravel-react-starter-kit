@@ -179,11 +179,7 @@ const Invoices: React.FC<InvoicesProps> = ({invoices}) => {
                                                 href={`/user/invoice/${invoice.id}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className={`block w-full px-4 py-3 text-center font-medium rounded-lg transition-all text-white ${
-                                                    hoveredInvoiceId === invoice.id
-                                                        ? "bg-[#FF3300] hover:bg-opacity-90"
-                                                        : "bg-[#012A38] hover:bg-opacity-90"
-                                                }`}
+                                                className={`block w-full px-4 py-3 text-center font-medium rounded-lg transition-all text-white bg-[#012A38] hover:bg-[#FF3300]`}
                                             >
                                                 <span className="flex items-center justify-center">
                                                     <svg className="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

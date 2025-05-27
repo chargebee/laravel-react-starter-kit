@@ -1,3 +1,9 @@
+### v1.2.0 (2025-05-27)
+* * * 
+
+* Standardized button interactions and visual feedback across the subscription & invoice interface by ensuring consistent hover effects, pointer cursors, and proper capitalization for action buttons.
+
+
 ### v1.1.0 (2025-05-26)
 * * * 
 
