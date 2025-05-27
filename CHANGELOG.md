@@ -1,3 +1,9 @@
+### v1.3.0 (2025-05-27)
+* * * 
+
+* Standardized button interactions and visual feedback across the Pricing card.
+
+
 ### v1.2.0 (2025-05-27)
 * * * 
 
