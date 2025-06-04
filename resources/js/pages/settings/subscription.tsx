@@ -240,7 +240,7 @@ const SubscriptionSettings: React.FC = ({subscription: subscription, plans}) => 
                                     <button
                                         onClick={handleUpdatePaymentMethod}
                                         disabled={isUpdating}
-                                        className={`flex-1 px-4 py-3 text-center font-medium rounded-lg transition-all text-white bg-[#012A38] hover:bg-[#FF3300] disabled:opacity-50 disabled:cursor-not-allowed`}
+                                        className={`flex-1 px-4 py-3 text-center font-medium rounded-lg transition-all text-white bg-[#012A38] hover:bg-[#FF3300] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`}
                                     >
                                         {isUpdating ? (
                                             <span className="flex items-center justify-center">
@@ -268,7 +268,7 @@ const SubscriptionSettings: React.FC = ({subscription: subscription, plans}) => 
                                     </button>
                                     {subscription?.chargebee_status !== 'cancelled' ? <button
                                         onClick={() => setCancelModalOpen(true)}
-                                        className="flex-1 px-4 py-3 text-center font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-zinc-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all"
+                                        className="flex-1 px-4 py-3 text-center font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-zinc-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all cursor-pointer"
                                     >
                                         <span className="flex items-center justify-center">
                                             <svg className="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
