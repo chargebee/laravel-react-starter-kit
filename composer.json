@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "chargebee/cashier": "v1.1.0",
+        "chargebee/cashier": "v1.2.0",
         "dompdf/dompdf": "^3.1",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
